@@ -1,0 +1,36 @@
+<ion-modal-view class="bg-gradient">
+  <ion-header-bar class="no-bg b-none">
+    <h1 class="title"></h1>
+    <button class="button button-icon button-clear button-light ion-android-close" ng-click="closeLogin()"></button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    
+    <div class="list card"> 
+      <label class="item item-input">
+        <span class="input-label">Email</span>
+        <input name="txtemail" type="email" ng-model="user.email" placeholder="Email" focus-me>
+      </label>
+      <label class="item item-input">
+      <span class="input-label">Password</span>
+        <input name="txtpassword" type="password" ng-model="user.password">
+      </label>
+    </div>
+
+    <button class="button button-block button-outline button-light" ng-click="signIn(user)"><b>Sign in</b></button>
+
+    <div class="light row">
+      <div class="col">
+        Forgot password
+      </div>
+      <div class="col text-right">
+        <a href="" class="light" ng-click="closeLogin(); openRegister()">Join Now</a>
+      </div>
+    </div>
+    <div class="light row">
+      <p class="text-center"> 
+        Login with:
+          <i ng-click="loginWithFacebook()" class="icon padding medium ion-social-facebook positive"></i><i ng-click="loginWithGoogle()" class="icon padding medium ion-social-google positive"></i><i ng-click="loginWithTwitter()" class="icon padding medium ion-social-twitter positive"></i>
+      </p>
+    </div>
+  </ion-content>
+</ion-modal-view>

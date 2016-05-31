@@ -1,0 +1,64 @@
+<ion-view>
+  <ion-nav-title>
+    <span class="logo-text">BRIGADE</span>
+  </ion-nav-title>
+  <!--   
+  <ion-nav-buttons side="secondary">
+    <button class="button button-icon ion-grid" ng-click="toggleMenu()"></button>
+  </ion-nav-buttons> 
+  -->
+
+  <!-- subheader bars at top -->
+  <!-- <div class="bar bar-subheader box-shadow">
+    <div class="button-bar">
+      <a class="button button-light icon-left ion-compose has-border-right" ng-click="openPost()">Share</a>
+      <a class="button button-light icon-left ion-camera" ng-click="openPost()">Photo</a>
+    </div>
+  </div> -->
+  
+  <!-- "has-subheader" class removed from ion-content -->
+  <ion-content class="stable-bg">
+    <ion-refresher on-refresh="refresh()" pulling-icon="ion-chevron-up"></ion-refresher>
+    <!-- Repeat over user's games -->
+    <div class="list card new-feeds" ng-repeat="item in [0,1,2,8]">
+
+      <div class="item text-center">
+        <h2 ui-sref="tab.post({id: $index})"><b>Pick-up Basketball</b></h2>
+        <p>TORONTO</p>
+        <p>2 hours</p>
+      </div>
+
+      <!-- 
+      <div class="item item-body post-body" ui-sref="tab.post({id: $index})">
+        <p class="post-text">
+          It's here! Our latest Global Video Index is now available. This quarter we show <a href="">new trends</a> in mobile video consumption, engagement patterns by length of video, how sports publishers can grow viewers around gameday & how programmatic is
+          <span class="seemore">...see more</span>
+        </p>
+      </div> 
+      -->
+
+      <div class="item tabs tabs-secondary tabs-icon-left">
+        <a class="" href="">
+          Friday, JUN 03
+        </a>
+        <a class="" href="">
+          5:00 PM
+        </a>
+      </div>
+    </div>   
+
+    <!-- Recommended games -->
+    <div class="list card">
+      <div class="item">
+        <h2>Jobs recommended for you</h2>
+      </div>
+
+      <div class="item item-avatar item-text-wrap" ng-repeat="item in [0,1,2]">
+        <img src="img/adam.jpg" class="avatar-organization">
+        <h2><b>Product Management Manager, Finance</b></h2>
+        <p>ABB bank, Ho Chi Minh</p>
+      </div>
+    </div>    
+
+  </ion-content>
+</ion-view>
