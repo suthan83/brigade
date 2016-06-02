@@ -1,5 +1,5 @@
 'Use Strict';
-angular.module('starter').controller('loginCtrl', function ($scope, $state, $ionicModal,$localStorage, $location, $http, $ionicPopup, $firebaseArray, $firebaseObject, Auth, FURL, Utils) {
+angular.module('brigade').controller('loginCtrl', function ($scope, $state, $ionicModal,$localStorage, $location, $http, $ionicPopup, $firebaseArray, $firebaseObject, Auth, FURL, Utils) {
   
   // Login modal
   $ionicModal.fromTemplateUrl('templates/welcome/login.html', {
@@ -38,19 +38,24 @@ angular.module('starter').controller('loginCtrl', function ($scope, $state, $ion
     
     Auth.login(user)
       .then(function(authData) {
-      console.log("id del usuario:" + JSON.stringify(authData));
+      // console.log("id del usuario:" + JSON.stringify(authData));
       ref.child('profile').orderByChild("id").equalTo(authData.uid).on("child_added", function(snapshot) {
-        console.log(authData);
-        console.log(snapshot.key());
+        // console.log("authdata >> " + authData);
+        // console.log("authdata UID >> " + authData.uid);
+        // console.log("snapshot.key >> " + snapshot.key());
+        
         userkey = snapshot.key();
         var obj = $firebaseObject(ref.child('profile').child(userkey));
 
+        // $loaded is a method on firebaseArray that only runs once
         obj.$loaded()
           .then(function(data) {
-            console.log(data === obj); // true
-            console.log(obj.email);
+            // console.log(data === obj); // true
+            // console.log(obj.email);
             $localStorage.email = obj.email;
             $localStorage.userkey = userkey;
+
+            $localStorage.userProfile = obj;
 
               Utils.hide();
               $state.go('tab.home');
@@ -76,7 +81,7 @@ angular.module('starter').controller('loginCtrl', function ($scope, $state, $ion
     Auth.register(user)
       .then(function() {
          Utils.hide();
-         console.log("Antes de loguear:" + JSON.stringify(user));
+         //console.log("Antes de loguear:" + JSON.stringify(user));
          Utils.alertshow("Successfully","The User was Successfully Created.");
          $location.path('/');
       }, function(err) {
@@ -119,8 +124,9 @@ ref.authWithOAuthPopup("twitter", function(error, authData) {
     console.log("Login Failed!", error);
   } else {
     console.log("Authenticated successfully with payload:", authData);
-    // var profileRef = $firebaseArray(ref.child('profile'));
-    // profileRef.$add(authData.twitter.username);
+    var profileRef = $firebaseArray(ref.child('profile'));
+    
+    profileRef.$add(authData);
     $state.go('tab.home');
     $scope.closeLogin();
   }

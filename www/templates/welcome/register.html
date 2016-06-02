@@ -5,14 +5,22 @@
   </ion-header-bar>
   <ion-content class="padding">
     <div class="list card"> 
-<!--       <label class="item item-input">
+      <label class="item item-input">
         <span class="input-label">First name</span>
-        <input ng-model="user.name" type="text" focus-me>
-      </label> -->
-<!--       <label class="item item-input">
+        <input ng-model="user.fname" type="text" focus-me>
+      </label>
+      <label class="item item-input">
         <span class="input-label">Last name</span>
-        <input type="text">
-      </label> -->
+        <input ng-model="user.lname" type="text">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">City</span>
+        <input ng-model="user.city" type="text">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Favorite Sport</span>
+        <input ng-model="user.favSport" type="text">
+      </label>
       <label class="item item-input">
         <span class="input-label">Email</span>
         <input ng-model="user.email" type="email">
@@ -21,6 +29,7 @@
       <span class="input-label">Password</span>
         <input ng-model="user.password" type="password">
       </label>
+      <!-- add/upload profile pic link here -->
     </div>
 
     <p class="light text-center">

@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.directives', 'ionic.contrib.ui.tinderCards', 'firebase', 'ngStorage'])
+angular.module('brigade', ['ionic', 'angularMoment', 'starter.controllers', 'starter.services', 'starter.directives', 'ionic.contrib.ui.tinderCards', 'firebase', 'ngStorage'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -54,7 +54,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     views: {
       'home': {
         templateUrl: 'templates/home/home.html',
-        controller: 'DemoCtrl'
+        controller: 'homeCtrl'
       }
     }
   })
@@ -64,7 +64,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     views: {
       'home': {
         templateUrl: 'templates/home/post.html',
-        controller: 'DemoCtrl'
+        controller: 'postCtrl'
       }
     }
   })
@@ -89,6 +89,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
+  .state('tab.profile', {
+    url: '/profile/:id',
+    views: {
+      'me': {
+        templateUrl: 'templates/profile/profile.html',
+        controller: 'profileCtrl'
+      }
+    }
+  })
+
   .state('tab.settings', {
     url: '/settings',
     views: {
@@ -109,12 +119,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-  .state('tab.search', {
-    url: '/search',
+  .state('tab.create', {
+    url: '/create',
     views: {
-      'search': {
-        templateUrl: 'templates/search/search.html',
-        controller: 'DemoCtrl'
+      'create': {
+        templateUrl: 'templates/create/create.html',
+        controller: 'createCtrl'
       }
     }
   })

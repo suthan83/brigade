@@ -20,12 +20,12 @@
   <ion-content class="stable-bg">
     <ion-refresher on-refresh="refresh()" pulling-icon="ion-chevron-up"></ion-refresher>
     <!-- Repeat over user's games -->
-    <div class="list card new-feeds" ng-repeat="item in [0,1,2,8]">
+    <div class="list card new-feeds" ng-repeat="item in games">
 
       <div class="item text-center">
-        <h2 ui-sref="tab.post({id: $index})"><b>Pick-up Basketball</b></h2>
-        <p>TORONTO</p>
-        <p>2 hours</p>
+        <h2 ui-sref="tab.post({id: item.$id})"><b>{{item.name}}</b></h2>
+        <p>{{item.location}}</p>
+        <p>{{item.duration}}</p>
       </div>
 
       <!-- 
@@ -39,10 +39,10 @@
 
       <div class="item tabs tabs-secondary tabs-icon-left">
         <a class="" href="">
-          Friday, JUN 03
+          {{ parsedDate(item.startDate) | date}}
         </a>
         <a class="" href="">
-          5:00 PM
+          {{ parsedDate(item.startDate) | date: shortTime }}
         </a>
       </div>
     </div>   
@@ -50,7 +50,7 @@
     <!-- Recommended games -->
     <div class="list card">
       <div class="item">
-        <h2>Jobs recommended for you</h2>
+        <h2>Games recommended for you</h2>
       </div>
 
       <div class="item item-avatar item-text-wrap" ng-repeat="item in [0,1,2]">

@@ -1,4 +1,4 @@
-angular.module('starter').factory('Auth', function(FURL, $firebaseAuth, $firebaseArray, $firebaseObject, Utils) {
+angular.module('brigade').factory('Auth', function(FURL, $firebaseAuth, $firebaseArray, $firebaseObject, Utils) {
 
 	var ref = new Firebase(FURL);
 	var auth = $firebaseAuth(ref);
@@ -9,6 +9,8 @@ angular.module('starter').factory('Auth', function(FURL, $firebaseAuth, $firebas
     createProfile: function(uid, user) {
       var profile = {
 				id: uid,
+        fname: user.fname,
+        lname: user.lname,
         email: user.email,
         gravatar: get_gravatar(user.email, 40),
 				registered_in: Date()
@@ -23,7 +25,6 @@ angular.module('starter').factory('Auth', function(FURL, $firebaseAuth, $firebas
     },
 
     login: function(user) {
-      console.log('login being called in service. User >' + user.email);
       return auth.$authWithPassword(
         {email: user.email, password: user.password}
       );
@@ -72,12 +73,12 @@ angular.module('starter').factory('Auth', function(FURL, $firebaseAuth, $firebas
 		if(authData) {
       angular.copy(authData, Auth.user);
       Auth.user.profile = $firebaseObject(ref.child('profile').child(authData.uid));
-      console.log(Auth.user.profile);
+      console.log(authData);
       console.log("on auth running if statement and copied data is above");
 		} else {
       if(Auth.user && Auth.user.profile) {
         Auth.user.profile.$destroy();
-        console.log("on auth running else auth user prfile is destroyed");
+        console.log("on auth running else auth user profile is destroyed");
 
       }
 

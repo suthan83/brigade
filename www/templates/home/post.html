@@ -12,15 +12,23 @@
 
     <div class="list card new-feeds">
       <div class="item text-center">
-        <p>FRI, MAY 6, 8;00 PM</p>
-        <h2><b>Pick-up Basketball</b></h2>
+        <p>{{ parsedDate(selectGame.startDate) | date}}</p>
+        <h2><b>{{selectGame.name}}</b></h2>
         <p>{{FlemingdonPark}} TORONTO</p>
-        <p>2 hours</p>
-        <p>Game at {{num}} players - Max {{maxNum}}</p>
+        <p>{{selectGame.duration}}</p>
+        <p>Game at {{selectGame.minPlayers}} players</p>
       </div>
       <div class="item text-center">
-        <p>status bar</p>
-        <p>{{days}} days left - 5/8</p>
+        <!-- CSS progress bar -->
+        <div class="contentContainer">
+          <div class="skillBar">
+            <h4>HTML</h4>
+            <div class="skillBarContainer">
+              <div class="skillBarValue value-90"></div>
+            </div>
+          </div>
+        </div>
+        <p>{{days}} days left - {{gamers}}/{{selectGame.minPlayers}}</p>
       </div>
 
 <!--       <div class="item item-image">
@@ -49,11 +57,11 @@
 
 
       <div class="item tabs tabs-secondary tabs-icon-left">
-        <a class="tab-item" href="">
+        <a class="tab-item" href="" ng-click="interested()">
           <i class="icon ion-heart"></i>
           Interested
         </a>
-        <a class="tab-item" href="">
+        <a class="tab-item" href="" ng-click="game()">
           <i class="icon ion-ios-basketball"></i>
           I'm Game
         </a>
@@ -64,31 +72,28 @@
       <!-- Users Playing -->
       <div class="item item-divider no-bg b-none">Playing</div>
       <div class="likers padding">
-        <img class="liker" src="img/adam.jpg" alt="" ng-repeat="i in [0,1,2,3]">
+        <img class="liker" src="img/adam.jpg" alt="" ng-repeat="user in selectGame.game" ui-sref="tab.profile({id: user.key})">
         <button class="button icon ion-more button-stable liker"></button>
       </div>
 
       <!-- Users Interested -->
       <div class="item item-divider no-bg b-none">Interested</div>
       <div class="likers padding">
-        <img class="liker" src="img/adam.jpg" alt="" ng-repeat="i in [0,1,2,3]">
+        <img class="liker" src="img/adam.jpg" alt="" ng-repeat="user in selectGame.interested" ui-sref="tab.profile({id: user.key})">
         <button class="button icon ion-more button-stable liker"></button>
       </div>
       
       <!-- Comments -->
       <div class="item item-divider no-bg b-none">Comments</div>
-      <div class="item item-avatar" ng-repeat="i in [0,1,2]">
+      <div class="item item-avatar" ng-repeat="comment in comments">
         <img src="img/ben.png">
         <div class="row no-padder">
           <div class="col-80">
-            <h2><b>Ben</b></h2>
-          </div>
-          <div class="col-20 text-muted text-right">
-            {{$index + 1}}d
+            <h2><b>{{comment.name}}</b></h2>
           </div>
         </div>
-        <p class="text-muted">Sales Executives</p>
-        <div class="dark text-wrap">That was so crowded there. They must love typography a lot!</div>
+        <p class="text-muted" am-time-ago="{{comment.time}}">{{comment.time}}</p>
+        <div class="dark text-wrap"></div>
       </div>
 
     </div>
@@ -96,9 +101,9 @@
 
   <div class="bar bar-footer sub-footer item-input-inset">
     <label class="item-input-wrapper">
-      <input type="search" placeholder="Add a comment">
+      <input type="search" ng-model="comment.text" placeholder="Add a comment">
     </label>
-    <button class="button button-clear">
+    <button class="button button-clear" ng-click="addComment(comment)">
       Submit
     </button>
   </div>
